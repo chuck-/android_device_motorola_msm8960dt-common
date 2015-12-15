@@ -189,6 +189,13 @@ PRODUCT_PACKAGES += \
     init.recovery.qcom.rc \
     ueventd.qcom.rc
 
+# Shim libraries
+PRODUCT_PACKAGES += \
+    libshim_camera \
+    libshim_log \
+    libshim_mdmcutback \
+    libshim_ril
+
 # Support
 PRODUCT_PACKAGES += \
     libcurl \
