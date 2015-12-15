@@ -196,6 +196,10 @@ PRODUCT_PACKAGES += \
     libshim_mdmcutback \
     libshim_ril
 
+# Stlport
+PRODUCT_PACKAGES += \
+    libstlport
+
 # Support
 PRODUCT_PACKAGES += \
     libcurl \
