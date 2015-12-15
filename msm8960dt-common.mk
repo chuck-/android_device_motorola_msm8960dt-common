@@ -196,9 +196,9 @@ PRODUCT_PACKAGES += \
     libshim_mdmcutback \
     libshim_ril
 
-# Stlport
+#Boringssl-compat
 PRODUCT_PACKAGES += \
-    libstlport
+    libboringssl-compat
 
 # Support
 PRODUCT_PACKAGES += \
