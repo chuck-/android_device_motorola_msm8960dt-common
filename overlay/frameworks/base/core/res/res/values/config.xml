@@ -93,10 +93,10 @@
     <bool name="config_wifiDisplaySupportsProtectedBuffers">false</bool>
 
     <!-- We dont have different firmware for wifi modes, prevent reloading it -->
-    <bool name="config_wifiApFirmwareReload">false</bool>
+    <!--bool name="config_wifiApFirmwareReload">false</bool-->
 
     <!-- Component name of the geofence services provider. -->
-    <string name="config_geofenceServicesProvider" translatable="false">com.motorola.motgeofencesvc</string>
+    <!--string name="config_geofenceServicesProvider" translatable="false">com.motorola.motgeofencesvc</string-->
 
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
