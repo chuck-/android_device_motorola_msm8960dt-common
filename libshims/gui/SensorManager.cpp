@@ -121,7 +121,7 @@ Sensor const* SensorManager::getDefaultSensor(int type)
         bool wakeUpSensor = false;
         // For the following sensor types, return a wake-up sensor. These types are by default
         // defined as wake-up sensors. For the rest of the sensor types defined in sensors.h 
-return
+		
         // a non_wake-up version.
         if (type == SENSOR_TYPE_PROXIMITY || type == SENSOR_TYPE_SIGNIFICANT_MOTION ||
             type == SENSOR_TYPE_TILT_DETECTOR || type == SENSOR_TYPE_WAKE_GESTURE ||
