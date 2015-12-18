@@ -25,9 +25,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.qcom.power.rc
-import init.target.rc
 import init.qcom.usb.rc
+import init.target.rc
 
 on early-init
     # Create firmware mount point
@@ -43,33 +42,21 @@ on early-init
     mkdir /persist 0771 system system
 
     # Symbols required for motorola blobs
-    export LD_SHIM_LIBS /system/lib/libjustshoot.so|libshim_camera.so:/system/vendor/lib/libqomx_jpegenc.so|libshim_log.so:/system/lib/libmdmcutback.so|libshim_mdmcutback.so:/system/bin/rild|libshim_ril.so:/system/lib/libril.so|libshim_ril.so:/system/lib/libsoundfx/libspeakerbundle.so|libshim_speakerbundle.so:/system/lib/libmot_sensorlistener.so|libshim_camera.so
-    
+	export LD_SHIM_LIBS /system/lib/libjustshoot.so|libshim_camera.so:/system/vendor/lib/libqomx_jpegenc.so|libshim_log.so:/system/lib/libmdmcutback.so|libshim_mdmcutback.so:/system/bin/rild|libshim_ril.so:/system/lib/libril.so|libshim_ril.so:/system/lib/libsoundfx/libspeakerbundle.so|libshim_speakerbundle.so:/system/lib/libmot_sensorlistener.so|libshim_camera.so:/system/lib/liblog.so|libshim_log.so
+	
      # Preload the BoringSSL wrapper
-    export LD_PRELOAD "libboringssl-compat.so"
+	export LD_PRELOAD "/system/lib/libboringssl-compat.so"
 
     symlink /data/tombstones /tombstones
 
 on init
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
-
     # External storage directories
     mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
     mkdir /storage/usbdisk 0700 root root
 
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-
     # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    symlink /storage/usbdisk /usbdisk
-    symlink /storage/usbdisk /mnt/usbdisk
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 
 on fs
     mount_all /fstab.qcom
@@ -95,8 +82,6 @@ on fs
     exec /system/bin/chown -L mot_tcmd:system /dev/block/platform/msm_sdcc.1/by-name/utags
 
     restorecon_recursive /persist
-
-    setprop ro.crypto.fuse_sdcard true
 
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
@@ -571,14 +556,6 @@ service qseecomd /system/bin/qseecomd
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
-
-# SD card services
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
-
-service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023  -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
-    class late_start
-    disabled
 
 # SSR
 on property:persist.sys.qc.sub.rdump.on=*
