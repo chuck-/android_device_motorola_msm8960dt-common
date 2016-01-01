@@ -202,6 +202,9 @@ PRODUCT_PACKAGES += \
     libQWiFiSoftApCfg \
     wpa_supplicant \
     wpa_supplicant.conf
+    
+PRODUCT_PACKAGES += \
+    libboringssl-compat    
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
