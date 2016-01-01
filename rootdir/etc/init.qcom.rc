@@ -48,6 +48,9 @@ on init
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
+
+    # Support legacy libs
+    symlink /system/vendor/lib/egl /egl
     
     # Preload the BoringSSL wrapper
     export LD_PRELOAD "/system/lib/libboringssl-compat.so"
